@@ -3,9 +3,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View,
   TouchableOpacity,
-  Alert,
+  View
 } from 'react-native';
 
 export default function LoginScreen({ navigation }) {
@@ -24,15 +23,15 @@ export default function LoginScreen({ navigation }) {
 
     try {
       // 실제 API 호출 부분은 주석 처리하고 모킹
-      /*
-      const response = await fetch('https://your-api-url.com/login', {
+      
+      const response = await fetch('http://133.186.213.135:80/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: id, password }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || '로그인 실패');
-      */
+      
 
       // 모킹: 로그인 성공 가정
       setTimeout(() => {
