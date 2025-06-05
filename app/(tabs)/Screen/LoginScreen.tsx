@@ -27,7 +27,7 @@ export default function LoginScreen({ navigation }) {
       const response = await fetch('http://133.186.213.135:80/api/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: id, password }),
+        body: JSON.stringify({ email : id, password }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || '로그인 실패');
