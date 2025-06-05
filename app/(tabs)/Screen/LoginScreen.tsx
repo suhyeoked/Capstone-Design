@@ -24,7 +24,7 @@ export default function LoginScreen({ navigation }) {
     try {
       // 실제 API 호출 부분은 주석 처리하고 모킹
       
-      const response = await fetch('http://133.186.213.135:80/api/signup', {
+      const response = await fetch('http://133.186.213.135:80/api/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: id, password }),

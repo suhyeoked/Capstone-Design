@@ -42,7 +42,7 @@ export default function JoinScreen({ navigation }) {
 
     try {
       // TODO: 실제 API URL로 변경
-      const response = await fetch('http://133.186.213.135:80/api/signin', {
+      const response = await fetch('http://133.186.213.135:80/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,6 +63,7 @@ export default function JoinScreen({ navigation }) {
         setError(data.message || '회원가입에 실패했습니다.');
       }
     } catch (error) {
+      console.log('SignUp Error:', error);
       setError('네트워크 오류가 발생했습니다.');
     } finally {
       setLoading(false);
