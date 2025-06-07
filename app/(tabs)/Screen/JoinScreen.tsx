@@ -9,20 +9,20 @@ import {
 } from 'react-native';
 
 export default function JoinScreen({ navigation }) {
+  const [name, setName] = useState('');               // ① 이름 state 추가
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const validateEmail = (email : string) => {
-    // 이메일 형식 간단 체크 (RFC 5322 완전 대응은 아니지만 일반적 사용에 충분)
+  const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
 
   const handleSignUp = async () => {
-    if (!id || !password || !confirmPassword) {
+    if (!name || !id || !password || !confirmPassword) { // ② 이름 체크 추가
       setError('모든 항목을 입력해주세요.');
       return;
     }
@@ -44,10 +44,9 @@ export default function JoinScreen({ navigation }) {
       // TODO: 실제 API URL로 변경
       const response = await fetch('http://133.186.213.135:80/api/signup', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          name,      // ③ name 포함
           email: id,
           password,
         }),
@@ -56,10 +55,9 @@ export default function JoinScreen({ navigation }) {
       const data = await response.json();
 
       if (response.ok) {
-        Alert.alert('회원가입 성공', `${id}님, 환영합니다!`);
+        Alert.alert('회원가입 성공', `${name}님, 환영합니다!`);
         navigation.goBack();
       } else {
-        // 서버에서 에러 메시지 전달 시 처리
         setError(data.message || '회원가입에 실패했습니다.');
       }
     } catch (error) {
@@ -72,6 +70,13 @@ export default function JoinScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      {/* 이름 입력란 */}
+      <TextInput
+        style={styles.input}
+        placeholder="이름"
+        value={name}
+        onChangeText={setName}
+      />
       <TextInput
         style={styles.input}
         placeholder="이메일"
