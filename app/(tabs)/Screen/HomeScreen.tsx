@@ -3,13 +3,10 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen({ route }) {
   const { name } = route.params || {};
-
+  
   return (
     <View style={styles.container}>
-      {/* Welcome Message */}
       <Text style={styles.welcomeText}>{name ? `${name}님 좋은 하루!` : '좋은 하루!'}</Text>
-
-      {/* Today's Goal Section */}
       <Text style={styles.subTitle}>오늘의 목표</Text>
       <View style={styles.taskContainer}>
         <TouchableOpacity style={styles.taskButton}>
@@ -43,7 +40,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
     marginTop: 50,
-    color: '#1e3a8a', // Dark blue color
+    color: 'black', // Dark blue color
   },
   subTitle: {
     fontSize: 18,

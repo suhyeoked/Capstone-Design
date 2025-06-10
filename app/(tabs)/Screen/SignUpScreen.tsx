@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import {
   Alert,
+  Image,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 
-export default function JoinScreen({ navigation }) {
+export default function SignUpScreen({ navigation }) {
   const [name, setName] = useState('');               // ① 이름 state 추가
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +47,7 @@ export default function JoinScreen({ navigation }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name,      // ③ name 포함
+          name,
           email: id,
           password,
         }),
@@ -56,7 +57,7 @@ export default function JoinScreen({ navigation }) {
 
       if (response.ok) {
         Alert.alert('회원가입 성공', `${name}님, 환영합니다!`);
-        navigation.goBack();
+        navigation.navigate('HomeScreen', { name });
       } else {
         setError(data.message || '회원가입에 실패했습니다.');
       }
@@ -70,7 +71,10 @@ export default function JoinScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* 이름 입력란 */}
+      <Image source={require('../img/nomore.png')} style={styles.logo} />
+        <Text style={styles.logoText}>
+          NoMore
+        </Text>
       <TextInput
         style={styles.input}
         placeholder="이름"
@@ -114,13 +118,35 @@ export default function JoinScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20, flex: 1, justifyContent: 'center' },
+  container: { 
+    padding: 20,
+    flex: 1, 
+    justifyContent: 'center' ,
+    alignItems: 'center',
+    backgroundColor : '#3E63AC' ,
+  },
+
+  logo: {
+    width: 100,
+    height: 100,
+    alignItems : "center"
+  },
+  logoText : {
+    fontSize : 36 ,
+    color : '#FFFFFF',
+    fontWeight : 'bold',
+    marginBottom : 40 ,
+    textAlign : "center"
+  },
   input: {
+    width : "100%" ,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#7BA7FFCC',
     borderRadius: 8,
     padding: 12,
-    marginBottom: 15,
+    marginBottom: 15 ,
+    color : '#FFFFFF',
+    fontWeight : '100'
   },
   error: {
     color: 'red',
@@ -128,13 +154,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   signUpButton: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#FFFFFF',
     padding: 15,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: 'center' , 
+    width : "100%" ,
   },
   signUpButtonText: {
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
   },
 });

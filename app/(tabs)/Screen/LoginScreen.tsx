@@ -38,25 +38,22 @@ export default function LoginScreen({ navigation }) {
     navigation.navigate('SignUp');
   };
 
-  const handleForgotPassword = () => {
-    // Add your forgot password logic here
-    console.log('Forgot password');
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>로그인</Text>
-      <Image source={require('./img/logo.png')} style={styles.logo} /> {/* Replace with your logo */}
+      <Image source={require('../img/nomore.png')} style={styles.logo} />
+      <Text style={styles.logoText}>
+              NoMore
+      </Text>
       <TextInput
         style={styles.input}
-        placeholder="아이디"
+        placeholder="아이디 입력"
         value={id}
         onChangeText={setId}
         autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
-        placeholder="비밀번호"
+        placeholder="비밀번호 입력"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -71,17 +68,9 @@ export default function LoginScreen({ navigation }) {
           {loading ? '로그인 중...' : '로그인'}
         </Text>
       </TouchableOpacity>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={[styles.colorButton, styles.yellowButton]} />
-        <TouchableOpacity style={[styles.colorButton, styles.greenButton]} />
-        <TouchableOpacity style={[styles.colorButton, styles.whiteButton]} />
-        <TouchableOpacity style={[styles.colorButton, styles.blackButton]} />
-      </View>
+     
       <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
         <Text style={styles.signUpButtonText}>회원가입</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.forgotPasswordButton} onPress={handleForgotPassword}>
-        <Text style={styles.forgotPasswordText}>비밀번호 찾기</Text>
       </TouchableOpacity>
     </View>
   );
@@ -93,7 +82,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2196F3', // Blue background
+    backgroundColor : '#3E63AC'
+  },
+  logoText : {
+    fontSize : 36 ,
+    color : '#FFFFFF',
+    fontWeight : 'bold' ,
+    marginBottom : 40
   },
   title: {
     fontSize: 30,
@@ -104,15 +99,16 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
-    marginBottom: 30,
   },
   input: {
+    color : "#FFFFFF" ,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#7BA7FFCC',
     borderRadius: 8,
     padding: 12,
     marginBottom: 15,
     width: '100%',
+    fontWeight : "100"
   },
   error: {
     color: 'red',
@@ -126,37 +122,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  disabledButton: {
-    backgroundColor: '#aaa',
-  },
+  
   loginButtonText: {
     color: 'white',
     fontWeight: 'bold',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginTop: 30,
-    marginBottom: 20,
-  },
-  colorButton: {
-    width: 50,
-    height: 50,
-    marginHorizontal: 10,
-    borderRadius: 25,
-  },
-  yellowButton: {
-    backgroundColor: 'yellow',
-  },
-  greenButton: {
-    backgroundColor: 'green',
-  },
-  whiteButton: {
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderWidth: 1,
-  },
-  blackButton: {
-    backgroundColor: 'black',
   },
   signUpButton: {
     marginTop: 15,
@@ -164,7 +133,7 @@ const styles = StyleSheet.create({
   },
   signUpButtonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
   },
   forgotPasswordButton: {
