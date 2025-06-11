@@ -60,7 +60,7 @@ export default function LoginScreen({ navigation }) {
       />
       {error ? <Text style={styles.error}>{error}</Text> : null}
       <TouchableOpacity
-        style={[styles.loginButton, loading && styles.disabledButton]}
+        style={[styles.loginButton]}
         onPress={handleLogin}
         disabled={loading}
       >

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 export default function SignUpScreen({ navigation }) {
-  const [name, setName] = useState('');               // ① 이름 state 추가
+  const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

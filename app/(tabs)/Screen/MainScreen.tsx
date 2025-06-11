@@ -26,10 +26,10 @@ export default function LoginScreen({ navigation }) {
       </Text>
       {error ? <Text style={styles.error}>{error}</Text> : null}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={[styles.colorButton, styles.yellowButton]} />
-        <TouchableOpacity style={[styles.colorButton, styles.greenButton]} />
-        <TouchableOpacity style={[styles.colorButton, styles.whiteButton]} />
-        <TouchableOpacity style={[styles.colorButton, styles.blackButton]} />
+        <Image source={require('../img/kakao.png')} style={styles.snsLoginButton}/>
+        <Image source={require('../img/naver.png')} style={styles.snsLoginButton}/>
+        <Image source={require('../img/google.png')} style={styles.snsLoginButton}/>
+        <Image source={require('../img/apple.png')} style={styles.snsLoginButton}/>
       </View>
       <TouchableOpacity
         style={[styles.loginButton]}
@@ -101,11 +101,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
   },
-  colorButton: {
-    width: 50,
-    height: 50,
+  snsLoginButton: {
+    width: 40,
+    height: 40,
     marginHorizontal: 10,
-    borderRadius: 25,
+    borderRadius : 20,
   },
   yellowButton: {
     backgroundColor: 'yellow',
