@@ -6,6 +6,7 @@ export default function HomeScreen({ route }) {
   
   return (
     <View style={styles.container}>
+      <View>
       <View style={styles.topNavBar} >
         <Image source={require('../img/search.png')} style={styles.topNavBarImage} />
         <Image source={require('../img/alarm.png')} style={styles.topNavBarImage} />
@@ -34,6 +35,7 @@ export default function HomeScreen({ route }) {
         <View style={styles.navButton} />
         <View style={styles.navButton} />
         <View style={styles.navButton} />
+      </View>
       </View>
     </View>
   );
@@ -108,18 +110,16 @@ const styles = StyleSheet.create({
   },
   taskTextBottom : {
     color : '#B4B4B4',
-    fontWeight : 'black' ,
+    fontWeight : 'black',
     cursor : 'pointer'
-  }
-  ,
+  }, 
   navContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     width: '100%',
-    height : 70 ,
+    height : 70,
     position: 'absolute',
-    bottom: 0,
-    paddingHorizontal: 30,
+    bottom: '-82%',
     backgroundColor : "#EFEFEF",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

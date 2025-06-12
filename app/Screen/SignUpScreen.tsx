@@ -58,6 +58,7 @@ export default function SignUpScreen({ navigation }) {
       if (response.ok) {
         Alert.alert('회원가입 성공', `${name}님, 환영합니다!`);
         navigation.navigate('HomeScreen', { name });
+
       } else {
         setError(data.message || '회원가입에 실패했습니다.');
       }
@@ -109,7 +110,11 @@ export default function SignUpScreen({ navigation }) {
         onPress={handleSignUp}
         disabled={loading}
       >
-        <Text style={styles.signUpButtonText}>
+        <Text style={styles.signUpButtonText} onPress={
+          ()=>{
+            Alert.alert("sad")
+          }
+        }>
           {loading ? '회원가입 중...' : '회원가입'}
         </Text>
       </TouchableOpacity>
