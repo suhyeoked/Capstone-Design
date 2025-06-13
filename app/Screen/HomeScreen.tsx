@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen({ route }) {
   const { name } = route.params || {};
-  
+  const [taskArray , setTaskArray] = useState(['111','222']);
+ 
   return (
     <View style={styles.container}>
       <View>
@@ -17,25 +18,25 @@ export default function HomeScreen({ route }) {
       </Text>
       <Text style={styles.subTitle}>오늘의 목표</Text>
       <View style={styles.taskContainer}>
-        <View style={styles.taskButton}>
-          <Text style={styles.taskText}>정보처리기사 자격증 취득</Text>
-          <Text style={styles.taskTextLine} />
-          <Text style={styles.taskTextBottom}>더보기</Text>
-        </View>
-        <View style={styles.taskButton}>
-          <Text style={styles.taskText}>30분씩 주 3회 운동</Text>
-          <Text style={styles.taskTextLine} />
-          <Text style={styles.taskTextBottom}>더보기</Text>
-        </View>
+        {
+          taskArray.map((item)=>{
+            return(
+            <View style={styles.taskButton}>
+              <Text style={styles.taskText}>{item}</Text>
+              <Text style={styles.taskTextLine} />
+              <Text style={styles.taskTextBottom}>더보기</Text>
+            </View>
+            )
+          })
+        }
       </View>
-
       {/* Bottom Navigation */}
+      </View>
       <View style={styles.navContainer}>
         <View style={styles.navButton} />
         <View style={styles.navButton} />
         <View style={styles.navButton} />
         <View style={styles.navButton} />
-      </View>
       </View>
     </View>
   );
@@ -50,14 +51,14 @@ const styles = StyleSheet.create({
   topNavBar : {
     flexDirection: 'row',
     position : 'absolute',
-    right : 30
+    right : 10 ,
+    justifyContent: 'flex-end',
   }
   ,
   topNavBarImage : {
     width : 30 ,
     height : 30 ,
     marginLeft : 15,
-    cursor : 'pointer'
   } 
   ,
   topNavBarButton : {
@@ -66,7 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor : '#3E63AC',
     borderRadius : 30,
     marginLeft : 15 ,
-    cursor : 'pointer'
   }
   ,
   welcomeText: {
@@ -116,18 +116,18 @@ const styles = StyleSheet.create({
   navContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '100%',
+    width: '112%',
     height : 70,
-    position: 'absolute',
-    bottom: '-82%',
+    position : 'absolute' ,
+    bottom : 0,
     backgroundColor : "#EFEFEF",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
   },
   navButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 40,
+    width: 26,
+    height: 26,
+    borderRadius: 26,
     backgroundColor: '#1e3a8a',
     alignSelf : 'center'
   },

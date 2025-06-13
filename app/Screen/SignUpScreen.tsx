@@ -17,11 +17,14 @@ export default function SignUpScreen({ navigation }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
-
+  const handleLogin = () => {
+    navigation.navigate('Login');
+  }
   const handleSignUp = async () => {
     if (!name || !id || !password || !confirmPassword) { // ② 이름 체크 추가
       setError('모든 항목을 입력해주세요.');
@@ -54,11 +57,10 @@ export default function SignUpScreen({ navigation }) {
       });
 
       const data = await response.json();
-
       if (response.ok) {
         Alert.alert('회원가입 성공', `${name}님, 환영합니다!`);
         navigation.navigate('HomeScreen', { name });
-
+        handleLogin();
       } else {
         setError(data.message || '회원가입에 실패했습니다.');
       }

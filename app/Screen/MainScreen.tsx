@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  Image, StyleSheet, Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+
 
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState('');
@@ -7,21 +14,32 @@ export default function LoginScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-
+  // 라우팅
   const handleLogin = () => {
     navigation.navigate('Login');
   };
-
-
   const handleSignUp = () => {
     navigation.navigate('SignUp');
   }
+  // 라우팅
 
 
+  const fadeAnim = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(()=>{
+    return {
+      opacity: fadeAnim.value,
+    }
+  })
+
+  useEffect(()=>{
+    fadeAnim.value = withTiming(1,{duration: 500})
+  }, []);
+  
   return (
     <View style={styles.container}>
       <Image source={require('../img/nomore.png')} style={styles.logo} />
-      <Text style={styles.logoText}>
+      <Text style={[styles.logoText, animatedStyle]}>
         NoMore
       </Text>
       {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -137,4 +155,5 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 14,
   },
+ 
 });

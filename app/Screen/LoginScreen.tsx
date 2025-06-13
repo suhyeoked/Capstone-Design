@@ -56,7 +56,7 @@ export default function LoginScreen({ navigation }) {
         placeholder="비밀번호 입력"
         value={password}
         onChangeText={setPassword}
-        secureTextEntry
+        secureTextEntry 
       />
       {error ? <Text style={styles.error}>{error}</Text> : null}
       <TouchableOpacity
