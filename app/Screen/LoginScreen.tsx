@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '../src/store';
+import { setUser } from '../src/store/userSlice';
 
 export default function LoginScreen({ navigation }) {
   const [id, setId] = useState('');
@@ -7,6 +10,9 @@ export default function LoginScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const dispatch = useDispatch<AppDispatch>();
+
+  
   const handleLogin = async () => {
     if (!id || !password) {
       setError('아이디와 비밀번호를 모두 입력해주세요.');
@@ -26,13 +32,24 @@ export default function LoginScreen({ navigation }) {
 
       setTimeout(() => {
         setLoading(false);
-        navigation.navigate('Home', { name: id });
+        dispatch(
+          setUser({
+            name: data.result.name,
+            email: data.result.email,
+          })
+        );
+        // 홈 화면으로 스택 초기화하여 이동
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home' }],
+        });
       }, 1000);
     } catch (err) {
       setLoading(false);
       setError(err.message || '로그인 실패');
     }
   };
+
 
   const handleSignUp = () => {
     navigation.navigate('SignUp');
