@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../src/store';
 
 export default function HomeScreen({ route }) {
-  const { name } = route.params || {};
-  const [taskArray , setTaskArray] = useState(['111','222']);
+  const name = useSelector((state : RootState)=>state.user.name)
+  const [taskArray , setTaskArray] = useState(['정보처리기사 자격증 공부','운동하기']);
  
   return (
     <View style={styles.container}>
