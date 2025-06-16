@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../src/store';
 
 export default function HomeScreen({ route }) {
   const name = useSelector((state : RootState)=>state.user.name)
-  const [taskArray , setTaskArray] = useState(['정보처리기사 자격증 공부','운동하기']);
- 
+  const [taskArray , setTaskArray] = useState(["정보처리 기사 공부하기"]);
+  const [taskArrayInput , setTaskArrayInput] = useState("");
+  const [targetAdd , setTargetAdd] = useState(false);
+
   return (
     <View style={styles.container}>
       <View>
@@ -19,19 +21,57 @@ export default function HomeScreen({ route }) {
         {name ? `${name}님 \n좋은 하루 !` : '좋은 하루!'}
       </Text>
       <Text style={styles.subTitle}>오늘의 목표</Text>
-      <View style={styles.taskContainer}>
-        {
-          taskArray.map((item)=>{
-            return(
-            <View style={styles.taskButton}>
-              <Text style={styles.taskText}>{item}</Text>
-              <Text style={styles.taskTextLine} />
-              <Text style={styles.taskTextBottom}>더보기</Text>
+      <Pressable onPress={()=>{
+          setTargetAdd(!targetAdd)
+        }}>
+        <View style={styles.targetAdd}>
+            <Text style={styles.targetAddText}>
+              추가
+            </Text>
+        </View>
+      </Pressable>
+      {
+        targetAdd == true ? 
+            <View>
+              <View style={styles.targetAddTextInput}>
+                <TextInput editable
+                  multiline
+                  numberOfLines={4}
+                  maxLength={40}
+                  onChange={(e)=>{
+                    setTaskArrayInput(e.nativeEvent.text)
+                  }}
+                  placeholder='목표를 입력하세요'/>
+              </View>
+              <View style={styles.targetAdd}>
+                <Pressable onPress={()=>{
+                  let copy = [...taskArray]
+                  copy.unshift(taskArrayInput)
+                  setTaskArray(copy)
+                }}>
+                  <Text style={styles.targetAddText}>
+                    추가
+                  </Text>
+                </Pressable>
+              </View>
             </View>
-            )
-          })
-        }
-      </View>
+            : null
+      }
+      
+          <View style={styles.taskContainer}>
+            { 
+              taskArray.map((item)=>{
+                return(
+                <View style={styles.taskButton}>
+                  <Text style={styles.taskText}>{item}</Text>
+                  <Text style={styles.taskTextLine} />
+                  <Text style={styles.taskTextBottom}>더보기</Text>
+                </View>
+                )
+              })
+            }
+          </View>
+
       {/* Bottom Navigation */}
       </View>
       <View style={styles.navContainer}>
@@ -80,11 +120,30 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 18,
-    color: 'black', // Grey color
+    color: 'black', 
     marginVertical: 20,
     fontWeight : 'bold' ,
     textAlign : 'left'
   },
+  targetAdd : {
+    backgroundColor : '#f3f4f6',
+    alignItems : 'center',
+    paddingTop : 10 ,
+    paddingBottom : 10 ,
+    borderRadius : 8,
+    width : 110 ,
+    paddingLeft : 10,
+    paddingRight : 10,
+  },
+  targetAddText : {
+    fontSize : 17 ,
+    fontWeight : 'bold' ,
+  },
+  targetAddTextInput :  {
+    paddingTop : 10,
+    paddingBottom : 10,
+    height : 100
+  } ,
   taskContainer: {
     width: '100%',
     marginTop: 10,
