@@ -22,7 +22,7 @@ export default function HomeScreen({ route }) {
       </Text>
       <Text style={styles.subTitle}>오늘의 목표</Text>
       <Pressable onPress={()=>{
-          setTargetAdd(!targetAdd)
+          setTargetAdd(true)
         }}>
         <View style={styles.targetAdd}>
             <Text style={styles.targetAddText}>
@@ -48,6 +48,7 @@ export default function HomeScreen({ route }) {
                   let copy = [...taskArray]
                   copy.unshift(taskArrayInput)
                   setTaskArray(copy)
+                  setTargetAdd(false)
                 }}>
                   <Text style={styles.targetAddText}>
                     추가
