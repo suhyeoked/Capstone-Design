@@ -67,12 +67,14 @@ export default function HomeScreen({ route }) {
                   <Text style={styles.taskText}>{item}</Text>
                   <Text style={styles.taskTextLine} />
                   <Text style={styles.taskTextBottom}>더보기</Text>
-                  <Pressable style={styles.taskTextBottomRemove} onPress={()=>{
+                  <Pressable onPress={()=>{
                     let remove = [...taskArray]
                     remove.shift();
                     setTaskArray(remove)
                   }}>
-                    삭제
+                    <Text style={styles.taskTextBottomRemove} >
+                      삭제
+                    </Text>
                   </Pressable>
                 </View>
                 )
@@ -182,8 +184,8 @@ const styles = StyleSheet.create({
     fontWeight : 'black',
   }, 
   taskTextBottomRemove : {
-    fontSize : 14 ,
     color : '#B4B4B4',
+    fontSize : 12
   } ,
   navContainer: {
     flexDirection: 'row',
