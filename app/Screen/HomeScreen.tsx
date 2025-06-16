@@ -5,7 +5,7 @@ import type { RootState } from '../src/store';
 
 export default function HomeScreen({ route }) {
   const name = useSelector((state : RootState)=>state.user.name)
-  const [taskArray , setTaskArray] = useState(["정보처리 기사 공부하기"]);
+  const [taskArray , setTaskArray] = useState([]);
   const [taskArrayInput , setTaskArrayInput] = useState("");
   const [targetAdd , setTargetAdd] = useState(false);
 
@@ -67,6 +67,13 @@ export default function HomeScreen({ route }) {
                   <Text style={styles.taskText}>{item}</Text>
                   <Text style={styles.taskTextLine} />
                   <Text style={styles.taskTextBottom}>더보기</Text>
+                  <Pressable style={styles.taskTextBottomRemove} onPress={()=>{
+                    let remove = [...taskArray]
+                    remove.shift();
+                    setTaskArray(remove)
+                  }}>
+                    삭제
+                  </Pressable>
                 </View>
                 )
               })
@@ -173,8 +180,11 @@ const styles = StyleSheet.create({
   taskTextBottom : {
     color : '#B4B4B4',
     fontWeight : 'black',
-    cursor : 'pointer'
   }, 
+  taskTextBottomRemove : {
+    fontSize : 14 ,
+    color : '#B4B4B4',
+  } ,
   navContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
