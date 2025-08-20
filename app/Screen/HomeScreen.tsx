@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../src/store';
 
-export default function HomeScreen({ route }) {
+
+export default function HomeScreen({ route , navigation }) {
   const name = useSelector((state : RootState)=>state.user.name)
   const [taskArray , setTaskArray] = useState([]);
   const [taskArrayInput , setTaskArrayInput] = useState("");
   const [targetAdd , setTargetAdd] = useState(false);
 
+  const [selected, setSelected] = useState("");
+
+
+  const handleCalendars = () => {
+    navigation.navigate('Calendars');
+  }
   return (
     <View style={styles.container}>
       <View>
@@ -79,15 +86,19 @@ export default function HomeScreen({ route }) {
               })
             }
           </View>
+          
 
       {/* Bottom Navigation */}
       </View>
-      <View style={styles.navContainer}>
-        <View style={styles.navButton} />
-        <View style={styles.navButton} />
-        <View style={styles.navButton} />
-        <View style={styles.navButton} />
+    <View style={styles.bottomBar}>
+      <TouchableOpacity onPress={handleCalendars}>
+        <View style={styles.navDot} />
+      </TouchableOpacity>
+        <View style={styles.navDot} />
+        <View style={styles.navDot} />
+        <View style={styles.navDot} />
       </View>
+      
     </View>
   );
 }
@@ -185,22 +196,19 @@ const styles = StyleSheet.create({
     fontSize : 14 ,
     color : '#B4B4B4',
   } ,
-  navContainer: {
+  bottomBar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0, right: 0,
+    height: 72,
+    backgroundColor: '#EFF1F5',
+    borderTopLeftRadius: 26,
+    borderTopRightRadius: 26,
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '112%',
-    height : 70,
-    position : 'absolute' ,
-    bottom : 0,
-    backgroundColor : "#EFEFEF",
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
-  navButton: {
-    width: 26,
-    height: 26,
-    borderRadius: 26,
-    backgroundColor: '#1e3a8a',
-    alignSelf : 'center'
-  },
-});
+  navDot: { width: 18, height: 18, borderRadius: 18, backgroundColor: '#3b5bdb' },
+
+}); 
